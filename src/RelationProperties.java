@@ -46,7 +46,7 @@ class RelationProperties {
 
 
 
-        return transivity;
+        return false;
     }
 
     public static boolean isAntiSymmetric(char[][] relation, char [] set){
