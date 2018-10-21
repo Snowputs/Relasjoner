@@ -106,6 +106,7 @@ class RelationProperties {
     }
 
     public static boolean isPartialOrder(char[][] relation, char [] set){
+
         return false;
     }
 
