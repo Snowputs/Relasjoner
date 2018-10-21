@@ -77,8 +77,28 @@ class RelationProperties {
     }
 
     public static boolean isAntiSymmetric(char[][] relation, char [] set){
+        boolean antiSym = true;
 
-        return false;
+        outerloop:
+        for(int i=0;i<relation.length;i++){
+            boolean flag = false;
+
+            for(int k=0;k<relation.length;k++){
+
+                if(relation[i][0] == relation[k][1] && relation[i][1] == relation[k][0]){
+                    if(relation[i][0] == relation[k][0]){
+                        flag = true;
+                        break;
+                    }
+                    if(!flag){
+                        antiSym = false;
+                        break outerloop;
+                    }
+                }
+            }
+        }
+
+        return antiSym;
     }
 
     public static boolean isEquivalenceRelation(char[][] relation, char [] set){
