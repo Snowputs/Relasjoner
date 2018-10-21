@@ -51,29 +51,33 @@ class RelationProperties {
 
         outerloop:
         for(int i=0;i<relation.length;i++){
-            boolean flag = false;
+            boolean flag = true;
 
             middleloop:
             for(int k=0;k<relation.length;k++){
+
                 if(relation[i][1] == relation[k][0]){
+                    flag = false;
                     for(int j=0;j<relation.length;j++){
+
                         if(relation[j][0] == relation[i][0] && relation[j][1] == relation[k][1]){
                             flag = true;
-                            break middleloop;
                         }
+                    }
+                    if(!flag){
+                        transivity = false;
+                        break outerloop;
                     }
                 }
             }
-            if(!flag){
-                transivity = false;
-                break outerloop;
-            }
+
         }
 
         return transivity;
     }
 
     public static boolean isAntiSymmetric(char[][] relation, char [] set){
+
         return false;
     }
 
