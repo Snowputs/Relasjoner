@@ -7,11 +7,13 @@ class RelationProperties {
     public static boolean isReflexive(char[][] relation, char [] set){
         boolean reflex = true;
 
-        outerloop: for(char c : set){
+        outerloop:
+        for(char c : set){
             boolean flag = false;
             for(int i=0;i<relation.length;i++){
                 if(c == relation[i][0] && c == relation[i][1]){
                     flag = true;
+                    break;
                 }
             }
             if(!flag){
@@ -26,11 +28,13 @@ class RelationProperties {
     public static boolean isSymmetric(char[][] relation, char [] set){
         boolean symmetry = true;
 
-        outerloop: for(int i=0;i<relation.length;i++){
+        outerloop:
+        for(int i=0;i<relation.length;i++){
             boolean flag = false;
             for(int k=0;k<relation.length;k++){
                 if(relation[i][0] == relation[k][1] && relation[i][1] == relation[k][0]){
                     flag = true;
+                    break;
                 }
             }
             if(!flag){
@@ -41,12 +45,32 @@ class RelationProperties {
         return symmetry;
     }
 
+    //IKKE FERDIG
     public static boolean isTransitive(char[][] relation, char [] set){
         boolean transivity = true;
 
+        outerloop:
+        for(int i=0;i<relation.length;i++){
+            boolean flag = false;
 
+            middleloop:
+            for(int k=0;k<relation.length;k++){
+                if(relation[i][1] == relation[k][0]){
+                    for(int j=0;j<relation.length;j++){
+                        if(relation[j][0] == relation[i][0] && relation[j][1] == relation[k][1]){
+                            flag = true;
+                            break middleloop;
+                        }
+                    }
+                }
+            }
+            if(!flag){
+                transivity = false;
+                break outerloop;
+            }
+        }
 
-        return false;
+        return transivity;
     }
 
     public static boolean isAntiSymmetric(char[][] relation, char [] set){
@@ -54,7 +78,7 @@ class RelationProperties {
     }
 
     public static boolean isEquivalenceRelation(char[][] relation, char [] set){
-        return false;
+        return isReflexive(relation, set) && isSymmetric(relation, set) && isTransitive(relation, set);
     }
 
     public static boolean isPartialOrder(char[][] relation, char [] set){
